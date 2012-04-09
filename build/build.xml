@@ -35,7 +35,7 @@
 
 	<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
 		<classpath>
-			<fileset dir="${basedir}/lib/jaxb/lib" includes="*.jar" />
+			<fileset dir="${jaxb}" includes="*.jar" />
 		</classpath>
 	</taskdef>
 	
@@ -87,8 +87,10 @@
 		<replaceregexp file="generated/litleTransaction_v${version}.xsd" match="&lt;xs:element ref=&quot;xp:echeckOrEcheckToken&quot; minOccurs=&quot;0&quot;\s?/>" replace="&lt;xs:choice>&lt;xs:element name=&quot;echeck&quot; type=&quot;xp:echeckType&quot;/>&lt;xs:element name=&quot;echeckToken&quot; type=&quot;xp:echeckTokenType&quot;/>&lt;/xs:choice>" byline="true"/>
 		<!--Actually generate code from the modified schema -->
 		<xjc schema="generated/litleOnline_v${version}.xsd" package="com.litle.sdk.generate" binding="xsd/bindings.xml" extension="true" source="1.0">
-			<produces dir="${generated}" includes="*impl/*"/>
+			<!--<produces dir="${generated}" includes="*impl/*"/> -->
 		</xjc>
+		<move file="${basedir}/build/com" todir="${generated}"/>
+
 	</target>
 
 	<target name="compile" depends="clean,generate" description="compile the source ">

@@ -121,10 +121,9 @@ public class LitleOnline {
 		LitleOnlineRequest request = createLitleOnlineRequest();
 		fillInReportGroup(auth);
 		
-		request.setTransaction(objectFactory.createAuthorization(auth));
+		request.setTransaction(auth);
 		LitleOnlineResponse response = sendToLitle(request);
-		JAXBElement<? extends TransactionTypeWithReportGroup> newresponse = response.getTransactionResponse();
-		return (AuthorizationResponse)newresponse.getValue();
+		return (AuthorizationResponse)response.getTransactionResponse();
 	}
 
 	/**
@@ -134,10 +133,9 @@ public class LitleOnline {
 		LitleOnlineRequest request = createLitleOnlineRequest();
 		fillInReportGroup(reversal);
 		
-		request.setTransaction(objectFactory.createAuthReversal(reversal));
+		request.setTransaction(reversal);
 		LitleOnlineResponse response = sendToLitle(request);
-		JAXBElement<? extends TransactionTypeWithReportGroup> newresponse = response.getTransactionResponse();
-		return (AuthReversalResponse)newresponse.getValue();
+		return (AuthReversalResponse)response.getTransactionResponse();
 	}
 	
 	/**
@@ -147,10 +145,9 @@ public class LitleOnline {
 		LitleOnlineRequest request = createLitleOnlineRequest();
 		fillInReportGroup(capture);
 		
-		request.setTransaction(objectFactory.createCapture(capture));
+		request.setTransaction(capture);
 		LitleOnlineResponse response = sendToLitle(request);
-		JAXBElement<? extends TransactionTypeWithReportGroup> newresponse = response.getTransactionResponse();
-		return (CaptureResponse)newresponse.getValue();
+		return (CaptureResponse)response.getTransactionResponse();
 	}
 	
 	/**
@@ -160,138 +157,141 @@ public class LitleOnline {
 		LitleOnlineRequest request = createLitleOnlineRequest();
 		fillInReportGroup(captureGivenAuth);
 		
-		request.setTransaction(objectFactory.createCaptureGivenAuth(captureGivenAuth));
+		request.setTransaction(captureGivenAuth);
 		LitleOnlineResponse response = sendToLitle(request);
-		JAXBElement<? extends TransactionTypeWithReportGroup> newresponse = response.getTransactionResponse();
-		return (CaptureGivenAuthResponse)newresponse.getValue();
+		return (CaptureGivenAuthResponse)response.getTransactionResponse();
 	}
 
-	/**
-	 * <script src="https://gist.github.com/2139739.js"></script>
-	 */
-	public CreditResponse credit(Credit credit) throws LitleOnlineException {
-		LitleOnlineRequest request = createLitleOnlineRequest();
-		fillInReportGroup(credit);
-		
-		request.setTransaction(objectFactory.createCredit(credit));
-		LitleOnlineResponse response = sendToLitle(request);
-		JAXBElement<? extends TransactionTypeWithReportGroup> newresponse = response.getTransactionResponse();
-		return (CreditResponse)newresponse.getValue();
-	}
-	
-	/**
-	 * <script src="https://gist.github.com/2139831.js"></script>
-	 */
-	public EcheckCreditResponse echeckCredit(EcheckCredit echeckcredit) throws LitleOnlineException {
-		LitleOnlineRequest request = createLitleOnlineRequest();
-		fillInReportGroup(echeckcredit);
-		
-		request.setTransaction(objectFactory.createEcheckCredit(echeckcredit));
-		LitleOnlineResponse response = sendToLitle(request);
-		JAXBElement<? extends TransactionTypeWithReportGroup> newresponse = response.getTransactionResponse();
-		return (EcheckCreditResponse)newresponse.getValue();
-	}
-	
-	/**
-	 * <script src="https://gist.github.com/2139852.js"></script>
-	 */
-	public EcheckRedepositResponse echeckRedeposit(EcheckRedeposit echeckRedeposit) throws LitleOnlineException {
-		LitleOnlineRequest request = createLitleOnlineRequest();
-		fillInReportGroup(echeckRedeposit);
-		
-		request.setTransaction(objectFactory.createEcheckRedeposit(echeckRedeposit));
-		LitleOnlineResponse response = sendToLitle(request);
-		JAXBElement<? extends TransactionTypeWithReportGroup> newresponse = response.getTransactionResponse();
-		return (EcheckRedepositResponse)newresponse.getValue();
-	}
-	
-	/**
-	 * <script src="https://gist.github.com/2139856.js"></script>
-	 */
-	public EcheckSalesResponse echeckSale(EcheckSale echeckSale) throws LitleOnlineException {
-		LitleOnlineRequest request = createLitleOnlineRequest();
-		fillInReportGroup(echeckSale);
-		
-		request.setTransaction(objectFactory.createEcheckSale(echeckSale));
-		LitleOnlineResponse response = sendToLitle(request);
-		JAXBElement<? extends TransactionTypeWithReportGroup> newresponse = response.getTransactionResponse();
-		return (EcheckSalesResponse)newresponse.getValue();
-	}
-	
-	/**
-	 * <script src="https://gist.github.com/2139863.js"></script>
-	 */
-	public EcheckVerificationResponse echeckVerification(EcheckVerification echeckVerification) throws LitleOnlineException {
-		LitleOnlineRequest request = createLitleOnlineRequest();
-		fillInReportGroup(echeckVerification);
-		
-		request.setTransaction(objectFactory.createEcheckVerification(echeckVerification));
-		LitleOnlineResponse response = sendToLitle(request);
-		JAXBElement<? extends TransactionTypeWithReportGroup> newresponse = response.getTransactionResponse();
-		return (EcheckVerificationResponse)newresponse.getValue();
-	}
-	
-	/**
-	 * <script src="https://gist.github.com/2174943.js"></script>
-	 */
-	public ForceCaptureResponse forceCapture(ForceCapture forceCapture) throws LitleOnlineException {
-		LitleOnlineRequest request = createLitleOnlineRequest();
-		fillInReportGroup(forceCapture);
-		
-		request.setTransaction(objectFactory.createForceCapture(forceCapture));
-		LitleOnlineResponse response = sendToLitle(request);
-		JAXBElement<? extends TransactionTypeWithReportGroup> newresponse = response.getTransactionResponse();
-		return (ForceCaptureResponse)newresponse.getValue();
-	}
-	
-	/**
-	 * <script src="https://gist.github.com/2139304.js"></script>
-	 */
-	public SaleResponse sale(Sale sale) throws LitleOnlineException {
-		LitleOnlineRequest request = createLitleOnlineRequest();
-		fillInReportGroup(sale);
-		
-		request.setTransaction(objectFactory.createSale(sale));
-		LitleOnlineResponse response = sendToLitle(request);
-		JAXBElement<? extends TransactionTypeWithReportGroup> newresponse = response.getTransactionResponse();
-		return (SaleResponse)newresponse.getValue();
-	}
-	
-	/**
-	 * <script src="https://gist.github.com/2139877.js"></script>
-	 */
-	public RegisterTokenResponse registerToken(RegisterTokenRequestType tokenRequest) throws LitleOnlineException {
-		LitleOnlineRequest request = createLitleOnlineRequest();
-		fillInReportGroup(tokenRequest);
-		
-		request.setTransaction(objectFactory.createRegisterTokenRequest(tokenRequest));
-		LitleOnlineResponse response = sendToLitle(request);
-		JAXBElement<? extends TransactionTypeWithReportGroup> newresponse = response.getTransactionResponse();
-		return (RegisterTokenResponse)newresponse.getValue();
-	}
-	
-	/**
-	 * <script src="https://gist.github.com/2139880.js"></script>
-	 */
-	public VoidResponse dovoid(com.litle.sdk.generate.Void v) throws LitleOnlineException {
-		LitleOnlineRequest request = createLitleOnlineRequest();
-		fillInReportGroup(v);
-		
-		request.setTransaction(objectFactory.createVoid(v));
-		LitleOnlineResponse response = sendToLitle(request);
-		JAXBElement<? extends TransactionTypeWithReportGroup> newresponse = response.getTransactionResponse();
-		return (VoidResponse)newresponse.getValue();
-	}
-
+//	/**
+//	 * <script src="https://gist.github.com/2139739.js"></script>
+//	 */
+//	public CreditResponse credit(Credit credit) throws LitleOnlineException {
+//		LitleOnlineRequest request = createLitleOnlineRequest();
+//		fillInReportGroup(credit);
+//		
+//		request.setTransaction(objectFactory.createCredit(credit));
+//		LitleOnlineResponse response = sendToLitle(request);
+//		JAXBElement<? extends TransactionTypeWithReportGroup> newresponse = response.getTransactionResponse();
+//		return (CreditResponse)newresponse.getValue();
+//	}
+//	
+//	/**
+//	 * <script src="https://gist.github.com/2139831.js"></script>
+//	 */
+//	public EcheckCreditResponse echeckCredit(EcheckCredit echeckcredit) throws LitleOnlineException {
+//		LitleOnlineRequest request = createLitleOnlineRequest();
+//		fillInReportGroup(echeckcredit);
+//		
+//		request.setTransaction(objectFactory.createEcheckCredit(echeckcredit));
+//		LitleOnlineResponse response = sendToLitle(request);
+//		JAXBElement<? extends TransactionTypeWithReportGroup> newresponse = response.getTransactionResponse();
+//		return (EcheckCreditResponse)newresponse.getValue();
+//	}
+//	
+//	/**
+//	 * <script src="https://gist.github.com/2139852.js"></script>
+//	 */
+//	public EcheckRedepositResponse echeckRedeposit(EcheckRedeposit echeckRedeposit) throws LitleOnlineException {
+//		LitleOnlineRequest request = createLitleOnlineRequest();
+//		fillInReportGroup(echeckRedeposit);
+//		
+//		request.setTransaction(objectFactory.createEcheckRedeposit(echeckRedeposit));
+//		LitleOnlineResponse response = sendToLitle(request);
+//		JAXBElement<? extends TransactionTypeWithReportGroup> newresponse = response.getTransactionResponse();
+//		return (EcheckRedepositResponse)newresponse.getValue();
+//	}
+//	
+//	/**
+//	 * <script src="https://gist.github.com/2139856.js"></script>
+//	 */
+//	public EcheckSalesResponse echeckSale(EcheckSale echeckSale) throws LitleOnlineException {
+//		LitleOnlineRequest request = createLitleOnlineRequest();
+//		fillInReportGroup(echeckSale);
+//		
+//		request.setTransaction(objectFactory.createEcheckSale(echeckSale));
+//		LitleOnlineResponse response = sendToLitle(request);
+//		JAXBElement<? extends TransactionTypeWithReportGroup> newresponse = response.getTransactionResponse();
+//		return (EcheckSalesResponse)newresponse.getValue();
+//	}
+//	
+//	/**
+//	 * <script src="https://gist.github.com/2139863.js"></script>
+//	 */
+//	public EcheckVerificationResponse echeckVerification(EcheckVerification echeckVerification) throws LitleOnlineException {
+//		LitleOnlineRequest request = createLitleOnlineRequest();
+//		fillInReportGroup(echeckVerification);
+//		
+//		request.setTransaction(objectFactory.createEcheckVerification(echeckVerification));
+//		LitleOnlineResponse response = sendToLitle(request);
+//		JAXBElement<? extends TransactionTypeWithReportGroup> newresponse = response.getTransactionResponse();
+//		return (EcheckVerificationResponse)newresponse.getValue();
+//	}
+//	
+//	/**
+//	 * <script src="https://gist.github.com/2174943.js"></script>
+//	 */
+//	public ForceCaptureResponse forceCapture(ForceCapture forceCapture) throws LitleOnlineException {
+//		LitleOnlineRequest request = createLitleOnlineRequest();
+//		fillInReportGroup(forceCapture);
+//		
+//		request.setTransaction(objectFactory.createForceCapture(forceCapture));
+//		LitleOnlineResponse response = sendToLitle(request);
+//		JAXBElement<? extends TransactionTypeWithReportGroup> newresponse = response.getTransactionResponse();
+//		return (ForceCaptureResponse)newresponse.getValue();
+//	}
+//	
+//	/**
+//	 * <script src="https://gist.github.com/2139304.js"></script>
+//	 */
+//	public SaleResponse sale(Sale sale) throws LitleOnlineException {
+//		LitleOnlineRequest request = createLitleOnlineRequest();
+//		fillInReportGroup(sale);
+//		
+//		request.setTransaction(objectFactory.createSale(sale));
+//		LitleOnlineResponse response = sendToLitle(request);
+//		JAXBElement<? extends TransactionTypeWithReportGroup> newresponse = response.getTransactionResponse();
+//		return (SaleResponse)newresponse.getValue();
+//	}
+//	
+//	/**
+//	 * <script src="https://gist.github.com/2139877.js"></script>
+//	 */
+//	public RegisterTokenResponse registerToken(RegisterTokenRequestType tokenRequest) throws LitleOnlineException {
+//		LitleOnlineRequest request = createLitleOnlineRequest();
+//		fillInReportGroup(tokenRequest);
+//		
+//		request.setTransaction(objectFactory.createRegisterTokenRequest(tokenRequest));
+//		LitleOnlineResponse response = sendToLitle(request);
+//		JAXBElement<? extends TransactionTypeWithReportGroup> newresponse = response.getTransactionResponse();
+//		return (RegisterTokenResponse)newresponse.getValue();
+//	}
+//	
+//	/**
+//	 * <script src="https://gist.github.com/2139880.js"></script>
+//	 */
+//	public VoidResponse dovoid(com.litle.sdk.generate.Void v) throws LitleOnlineException {
+//		LitleOnlineRequest request = createLitleOnlineRequest();
+//		fillInReportGroup(v);
+//		
+//		request.setTransaction(objectFactory.createVoid(v));
+//		LitleOnlineResponse response = sendToLitle(request);
+//		JAXBElement<? extends TransactionTypeWithReportGroup> newresponse = response.getTransactionResponse();
+//		return (VoidResponse)newresponse.getValue();
+//	}
+//
 	private LitleOnlineRequest createLitleOnlineRequest() {
-		LitleOnlineRequest request = new LitleOnlineRequest();
-		request.setMerchantId(config.getProperty("merchantId"));
-		request.setVersion(config.getProperty("version"));
-		Authentication authentication = new Authentication();
-		authentication.setPassword(config.getProperty("password"));
-		authentication.setUser(config.getProperty("username"));
-		request.setAuthentication(authentication);
-		return request;
+		try {
+			LitleOnlineRequest request = objectFactory.createLitleOnlineRequest();
+			request.setMerchantId(config.getProperty("merchantId"));
+			request.setVersion(config.getProperty("version"));
+			Authentication authentication = objectFactory.createAuthentication();
+			authentication.setPassword(config.getProperty("password"));
+			authentication.setUser(config.getProperty("username"));
+			request.setAuthentication(authentication);
+			return request;
+		} catch (JAXBException e) {
+			throw new LitleOnlineException("Error constructing basic objects", e);
+		}
 	}
 	
 	private LitleOnlineResponse sendToLitle(LitleOnlineRequest request) throws LitleOnlineException {
