@@ -53,7 +53,7 @@ import javax.xml.bind.Unmarshaller;
 import org.oasis.ubl.order.OrderType;
 
 /*
- * $Id: PrintOrder.java,v 1.1 2007-12-05 00:49:45 kohsuke Exp $
+ * $Id: PrintOrder.java,v 1.1 2007/12/05 00:49:45 kohsuke Exp $
  */
  
 /**

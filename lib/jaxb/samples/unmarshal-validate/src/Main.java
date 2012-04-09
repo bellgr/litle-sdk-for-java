@@ -35,6 +35,8 @@
  */
  
 import java.io.File;
+import java.io.IOException;
+import java.math.BigDecimal;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -45,6 +47,8 @@ import javax.xml.bind.ValidationEvent;
 import javax.xml.bind.ValidationEventHandler;
 import javax.xml.bind.ValidationEventLocator;
 
+import org.w3c.dom.Node;
+
 import static javax.xml.XMLConstants.W3C_XML_SCHEMA_NS_URI;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Schema;
@@ -53,7 +57,7 @@ import javax.xml.validation.Schema;
 import primer.po.*;
 
 /*
- * $Id: Main.java,v 1.2 2009-11-11 14:17:31 pavel_bucek Exp $
+ * $Id: Main.java,v 1.1 2007/12/05 00:49:47 kohsuke Exp $
  */
  
 public class Main {

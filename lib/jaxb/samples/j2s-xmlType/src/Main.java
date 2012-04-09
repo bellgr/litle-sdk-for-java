@@ -35,11 +35,12 @@
  */
 
 /*
- * $Id: Main.java,v 1.2 2009-11-11 14:17:30 pavel_bucek Exp $
+ * $Id: Main.java,v 1.1 2007/12/05 00:49:31 kohsuke Exp $
  */
 
 
 import java.io.File;
+import java.io.FileOutputStream;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;

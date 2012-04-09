@@ -52,7 +52,7 @@ import org.xml.sax.helpers.XMLFilterImpl;
 import primer.PurchaseOrderType;
 
 /*
- * @(#)$Id: Splitter.java,v 1.1 2007-12-05 00:49:34 kohsuke Exp $
+ * @(#)$Id: Splitter.java,v 1.1 2007/12/05 00:49:34 kohsuke Exp $
  */
  
 /**

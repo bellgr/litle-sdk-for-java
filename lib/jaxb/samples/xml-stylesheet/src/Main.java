@@ -39,11 +39,15 @@ import java.io.File;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Marshaller;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.sax.SAXTransformerFactory;
+import javax.xml.transform.sax.TransformerHandler;
+import javax.xml.transform.stream.StreamResult;
 
 import primer.PurchaseOrderType;
 
 /*
- * @(#)$Id: Main.java,v 1.2 2009-11-11 14:17:28 pavel_bucek Exp $
+ * @(#)$Id: Main.java,v 1.1 2007/12/05 00:49:50 kohsuke Exp $
  */
 
 public class Main {

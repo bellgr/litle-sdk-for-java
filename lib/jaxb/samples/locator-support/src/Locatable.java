@@ -1,5 +1,5 @@
 /*
- * @(#)$Id: Locatable.java,v 1.1 2007-12-05 00:49:32 kohsuke Exp $
+ * @(#)$Id: Locatable.java,v 1.1 2007/12/05 00:49:32 kohsuke Exp $
  */
 
 /*

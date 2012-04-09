@@ -47,7 +47,7 @@ import org.xml.sax.SAXException;
 import primer.myPo.*;
 
 /*
- * $Id: Main.java,v 1.1 2007-12-05 00:49:48 kohsuke Exp $
+ * $Id: Main.java,v 1.1 2007/12/05 00:49:48 kohsuke Exp $
  */
 public class Main {
     

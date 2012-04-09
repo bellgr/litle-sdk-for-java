@@ -34,11 +34,16 @@
  * holder.
  */
 
+import java.io.File;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Marshaller;
+import javax.xml.parsers.SAXParserFactory;
 
 import com.sun.xml.bind.marshaller.CharacterEscapeHandler;
+
+import org.xml.sax.XMLReader;
 
 import simple.*;
 

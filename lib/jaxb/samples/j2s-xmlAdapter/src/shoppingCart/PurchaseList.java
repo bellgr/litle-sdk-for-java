@@ -35,7 +35,7 @@
  */
 
 /*
- * $Id: PurchaseList.java,v 1.1 2007-12-05 00:49:28 kohsuke Exp $
+ * $Id: PurchaseList.java,v 1.1 2007/12/05 00:49:28 kohsuke Exp $
  */
 
 package shoppingCart;

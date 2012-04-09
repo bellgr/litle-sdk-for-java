@@ -36,6 +36,7 @@
  
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -47,7 +48,7 @@ import javax.xml.bind.Unmarshaller;
 import com.example.ipo.*;
 
 /*
- * $Id: Main.java,v 1.2 2009-11-11 14:17:31 pavel_bucek Exp $
+ * $Id: Main.java,v 1.1 2007/12/05 00:49:40 kohsuke Exp $
  */
  
 public class Main {

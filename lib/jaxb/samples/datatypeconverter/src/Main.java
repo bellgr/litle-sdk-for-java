@@ -49,7 +49,7 @@ import javax.xml.bind.Unmarshaller;
 import primer.myPo.*;
 
 /*
- * $Id: Main.java,v 1.1 2007-12-05 00:49:22 kohsuke Exp $
+ * $Id: Main.java,v 1.1 2007/12/05 00:49:22 kohsuke Exp $
  */
 public class Main {
     
