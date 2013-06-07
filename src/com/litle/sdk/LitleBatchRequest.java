@@ -44,34 +44,47 @@ public class LitleBatchRequest {
 
     private File txnsFile;
     private File batchFile;
-    private Integer totalTxns = 0;
+    private Integer totalTxns;
+    private final static int MAX_TXNS_PER_BATCH = 100000;
 
     public LitleBatchRequest(){
-        try{
+        // must be in this order
+        init();
+    }
 
-            jc = JAXBContext.newInstance("com.litle.sdk.generate");
-            marshaller = jc.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-            unmarshaller = jc.createUnmarshaller();
-            communication = new Communication();
-            objectFactory = new ObjectFactory();
-            batchRequest = objectFactory.createBatchRequest();
+    public LitleBatchRequest(File batchFile, File txnsFile){
+        // they passed us extant batch/txns files. let's help them out!
+        if(batchFile.exists() && txnsFile.exists()){
+            if(batchFile.getName().matches("batch_\\d+.closed-\\d+\\z")){ //unless those jerks sent us a closed batch
+                init();
+            }
+            else{
+                this.txnsFile = txnsFile;
+                this.batchFile = batchFile;
+                initUtils();
+                //do unmarshalling here
+                try {
+                    batchRequest = (BatchRequest)unmarshaller.unmarshal(batchFile);
+                } catch (JAXBException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                calculateTotalTxns();
+            }
         }
-        catch(Exception ex){
-            ex.printStackTrace();
+        else{
+            init(); //silly merchant brogrammer sent us nonexistant files
         }
-        try {
-            batchFile = this.generateFile();
-            txnsFile = new File(batchFile.getAbsolutePath() + "_txns");
-            txnsFile.createNewFile();
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
-        System.out.println("Created file at: " + txnsFile.getAbsoluteFile());
+    }
 
-        //set the default value for num / values
+    private void init(){
+        initUtils();
+        initBatch();
+        totalTxns = 0;
+    }
+
+    private void initBatch(){
+        batchRequest = objectFactory.createBatchRequest();
 
         batchRequest.setAuthAmount(BigInteger.valueOf(0));
         batchRequest.setNumAuths(BigInteger.valueOf(0));
@@ -110,11 +123,60 @@ public class LitleBatchRequest {
         batchRequest.setNumUpdateCardValidationNumOnTokens(BigInteger.valueOf(0));
 
         batchRequest.setNumAccountUpdates(BigInteger.valueOf(0));
+
+        try {
+            batchFile = this.generateFile();
+            txnsFile = new File(batchFile.getAbsolutePath() + "_txns");
+            txnsFile.createNewFile();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+
+        System.out.println("Created file at: " + batchFile.getAbsoluteFile());
+    }
+
+    private void initUtils(){
+        try{
+            jc = JAXBContext.newInstance("com.litle.sdk.generate");
+            marshaller = jc.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            unmarshaller = jc.createUnmarshaller();
+            communication = new Communication();
+            objectFactory = new ObjectFactory();
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
+    private void calculateTotalTxns(){
+        totalTxns = batchRequest.getNumSales().intValue() +
+                batchRequest.getNumAuths().intValue() +
+                batchRequest.getNumCredits().intValue() +
+                batchRequest.getNumTokenRegistrations().intValue() +
+                batchRequest.getNumCaptureGivenAuths().intValue() +
+                batchRequest.getNumForceCaptures().intValue() +
+                batchRequest.getNumAuthReversals().intValue() +
+                batchRequest.getNumCaptures().intValue() +
+                batchRequest.getNumEcheckVerification().intValue() +
+                batchRequest.getNumEcheckCredit().intValue() +
+                batchRequest.getNumEcheckRedeposit().intValue() +
+                batchRequest.getNumEcheckSales().intValue() +
+                batchRequest.getNumUpdateCardValidationNumOnTokens().intValue() +
+                batchRequest.getNumAccountUpdates().intValue();
     }
 
     public void addTransaction(TransactionType txn) throws Exception{
 
-        //check dat jank
+        //oh no! they tried to put too many transactions in a batch. let's help a brother out
+        if(totalTxns+1 > MAX_TXNS_PER_BATCH){
+            this.closeBatch();
+            //reinitialize the batch
+            init();
+        }
+
 
         StringWriter strw = new StringWriter();
         JAXBElement transactionType;
@@ -202,10 +264,19 @@ public class LitleBatchRequest {
         writer.write(xml);
         writer.write("\n");
         writer.close();
+
+        //now marshal the newly updated batch object to the batch file
+        try{
+            marshaller.marshal(batchRequest, batchFile);
+        } catch(JAXBException e){
+            e.printStackTrace();
+        }
+
     }
 
+    //guarantees unique file generation
     private File generateFile() throws IOException{
-        String filename = "request_" + String.valueOf(System.currentTimeMillis());
+        String filename = "batch_" + String.valueOf(System.currentTimeMillis());
         File file = new File(filename);
         if(file.exists()) {
             return generateFile();
